@@ -21,3 +21,12 @@
 Session.vim
 .netrwhist
 
+# bazel
+/bazel-bin
+/bazel-contrib
+/bazel-genfiles
+/bazel-out
+/bazel-testlogs
+
+# pytohn
+**/*.pyc
