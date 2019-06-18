@@ -1,5 +1,5 @@
-TAG=v1
-IMAGE=gcr.io/google-containers/startup-script
+TAG=v2
+IMAGE=gcr.io/mikedanese-k8s/startup-script
 
 .PHONY: build push
 
@@ -7,4 +7,4 @@ build:
 	docker build --pull -t $(IMAGE):$(TAG) .
 
 push: build
-	gcloud docker -- push $(IMAGE):$(TAG)
+	docker push $(IMAGE):$(TAG)

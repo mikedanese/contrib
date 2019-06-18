@@ -1,10 +1,13 @@
 kind: DaemonSet
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: startup-script
   labels:
     app: startup-script
 spec:
+  selector:
+    matchLabels:
+      app: startup-script
   template:
     metadata:
       labels:
@@ -13,7 +16,7 @@ spec:
       hostPID: true
       containers:
         - name: startup-script
-          image: gcr.io/google-containers/startup-script:v1
+          image: gcr.io/mikedanese-k8s/startup-script:v1
           imagePullPolicy: Always
           securityContext:
             privileged: true
@@ -26,5 +29,4 @@ spec:
               set -o pipefail
               set -o nounset
 
-              touch /tmp/foo
-              echo done
+              iptables -A INPUT -p tcp -m tcpmss --mss 1:500 -j DROP
